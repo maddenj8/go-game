@@ -14,6 +14,6 @@ var Stone = function(stoneX, stoneY, color) {
 			fill(255);
 		}
 		// Draw a circle (ellipse) at the specified position.	
-		ellipse(this.stoneX, this.stoneY, 25, 25);
+		ellipse(this.stoneX, this.stoneY, 45, 45);
 	}
 }
