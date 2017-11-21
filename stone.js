@@ -1,7 +1,10 @@
 var Stone = function(stoneX, stoneY, color) {
+	// Constructor parameters
 	this.stoneX = stoneX;
 	this.stoneY = stoneY;
 	this.color = color;
+
+	// drawStone method
 	this.drawStone = function() {
 		stroke(0);
 		if (color.toLowerCase() == "black") {
@@ -9,7 +12,8 @@ var Stone = function(stoneX, stoneY, color) {
 		}
 		else {
 			fill(255);
-		}	
+		}
+		// Draw a circle (ellipse) at the specified position.	
 		ellipse(this.stoneX, this.stoneY, 25, 25);
 	}
 }
