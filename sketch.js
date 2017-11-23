@@ -9,13 +9,7 @@ function setup() {
 function checkMousePosition() {
 	tmpX = mouseX; //freeze the mouseX and mouseY at the particular frame 
 	tmpY = mouseY;
-
-	if (player.color == "black") {
-		fill(0);
-	}
-	else {
-		fill(255);
-	}
+	fill(0) ? player.color == "black" : fill(255);
 	for (var i = 0; i < player.board.size; i++) {
 		for (var j = 0; j < player.board.size; j++) {
 			if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25)) {
@@ -53,8 +47,14 @@ function checkMousePosition() {
 
 function mousePressed() {
 	//fix a bug where even if the mouse was placed out of range stones could be placed off the board
-	if (tmpX >= 40 && tmpY >= 40) {
+	//checks if it is the players turn 
+	if (tmpX >= 40 && tmpY >= 40 && player.currentTurn) {
 		player.placeStone(tmpX, tmpY);
+		//SEND COORDINATES OF THE NEW STONE TO THE SERVER HERE
+		player.currentTurn = false;
+	}
+	else {
+		alert("It is your opponents turn please wait");
 	}
 	//since with the check method tmpX and tmpY is the coordinates of the stone you can use this
 	//to place the stone in the right coordinates not necessarily where the mouse is
@@ -66,5 +66,7 @@ function draw() {
 	rect(0, 0, 540, 540);
 	player.board.drawBoard(); //draws the board itself
 	player.board.drawStones(); //draws any stones that need to be drawn on the board
-	checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be placed	
+	if (player.currentTurn) {
+		checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be placed	
+	}
 }
