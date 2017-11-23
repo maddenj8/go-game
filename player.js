@@ -1,37 +1,40 @@
 var Player = function() {
 
-	this.rating = 0				// Their rating is whatever is found in their row in the DB.
-	this.username = ""	
-	this.score = 0				// Each game, both player's score initialise to 0.
-	this.currentTurn			// Boolean (T/F) Specifying whose turn it is.
-	this.color = "black"		// Either "black" or "white" -- Boolean approach might be wiser.
-	this.password
+	this.board = new Board();
+	this.board.buildBoard();
+	this.rating = 0;				// Their rating is whatever is found in their row in the DB.
+	this.username = "";	
+	this.score = 0;				// Each game, both player's score initialise to 0.
+	this.currentTurn;			// Boolean (T/F) Specifying whose turn it is.
+	this.color = "black";		// Either "black" or "white" -- Boolean approach might be wiser.
+	this.password;
 
 	// Template function - this will be stored in a database.
-	var makeAccount = function(username, password) {
+	this.makeAccount = function(username, password) {
 		this.username = username;
 		this.password = password;
 		// Add these to that players objects (make them private if possible)
 	}
 
-	var displayScore = function() {
+	this.displayScore = function() {
 		// Returns an integer of this player object's score
 		return this.score;
 	}
 
-	var placeStone = function(board, stoneX, stoneY) {
+	this.placeStone = function(stoneX, stoneY) {
 		// Add a Tile.isEmpty() method to the tile class & an moveIsLegal() method.
 		// board[stoneX][stoneY] is a Tile Obj.
 		// Check if the slot is empty & that the move is legal.
-		if (board[stoneX][stoneY].isEmpty() && board[stoneX][stoneY].moveIsLegal()) {
+		if (this.board.isEmpty(stoneX, stoneY)) { //add checkLegalMove
 			// If both of these conditions are true, we can place a stone.
-			board[stoneX][stoneY].addStone(stoneX, stoneY, this.color)
+			console.log(stoneX, stoneY);
+			this.board.stones.push(new Stone(stoneX, stoneY, this.color));
+			console.log(this.board.stones[0]);
 		}
 		else {
-			console.log("Invalid Liberty.")
+			console.log("Invalid Move.")
 		}
-
-		return board;			// Returns an updated version of the board object.
 	}
+	
 
 }

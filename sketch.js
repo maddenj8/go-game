@@ -1,18 +1,67 @@
-var board = new Board();
-var tmp_stone_black;
-var tmp_stone_white;
+var player = new Player();
+var tmpX;
+var tmpY;
 function setup() {
-	createCanvas(900, 900);
-	board.buildBoard();
-	tmp_stone_black = new Stone(board.board[1][1].x, board.board[1][1].y, "black");
-	tmp_stone_white = new Stone(board.board[0][0].x, board.board[0][0].y, "white");
+	createCanvas(900, 900); //create the canvas
+	console.log(player.board);
+}
+
+function checkMousePosition() {
+	tmpX = mouseX; //freeze the mouseX and mouseY at the particular frame 
+	tmpY = mouseY;
+
+	if (player.color == "black") {
+		fill(0);
+	}
+	else {
+		fill(255);
+	}
+	for (var i = 0; i < player.board.size; i++) {
+		for (var j = 0; j < player.board.size; j++) {
+			if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25)) {
+			//check if the mouse is in range of the stone
+				tmpX = player.board.board[i][j].x;
+				tmpY = player.board.board[i][j].y;
+				//set tmpX and Y to the coordinates the stone will be placed
+				ellipse(player.board.board[i][j].x, player.board.board[i][j].y, 45, 45);
+				return;
+			} 
+			else if (tmpX > (player.board.size * 50 + 20) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25)) {
+			//work arounds for the edges of the board as they go out of range of board 
+			//list so I can't use the method as above.
+				ellipse(player.board.size * 50 + 40, player.board.board[i][j].y, 45, 45);
+				tmpX = player.board.size * 50 + 40;
+				tmpY = player.board.board[i][j].y;
+				return;
+			}
+			else if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.size * 50 + 20)) {
+				ellipse(player.board.board[i][j].x, player.board.size * 50 + 40, 45, 45);
+				tmpX = player.board.board[i][j].x;
+				tmpY = player.board.size * 50 + 40;
+				return;
+			}
+			//workaround for the bottom left corner as none of these conditions covered that case
+			else if (tmpX > (player.board.size * 50 + 20) && tmpY > (player.board.size * 50 + 20)) {
+				ellipse(player.board.size * 50 + 40, player.board.size * 50 + 40, 45, 45);
+				tmpX = player.board.size * 50 + 40;
+				tmpY = player.board.size * 50 + 40;
+			}
+		}
+	}
+}
+
+function mousePressed() {
+	player.placeStone(tmpX, tmpY);
+	//since with the check method tmpX and tmpY is the coordinates of the stone you can use this
+	//to place the stone in the right coordinates not necessarily where the mouse is
 }
 
 function draw() {
 	//draw the board at every frame
-	fill(242, 176, 109);
+	fill(242, 176, 109); //draws the frame of the board 
 	rect(0, 0, 540, 540);
-	board.drawBoard();
-	tmp_stone_black.drawStone()
-	tmp_stone_white.drawStone()
+	player.board.drawBoard(); //draws the board itself
+	player.board.drawStones(); //draws any stones that need to be drawn on the board
+	checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be 
+				//placed	
 }
