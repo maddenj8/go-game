@@ -45,13 +45,17 @@ function checkMousePosition() {
 				ellipse(player.board.size * 50 + 40, player.board.size * 50 + 40, 45, 45);
 				tmpX = player.board.size * 50 + 40;
 				tmpY = player.board.size * 50 + 40;
+				return;
 			}
 		}
 	}
 }
 
 function mousePressed() {
-	player.placeStone(tmpX, tmpY);
+	//fix a bug where even if the mouse was placed out of range stones could be placed off the board
+	if (tmpX >= 40 && tmpY >= 40) {
+		player.placeStone(tmpX, tmpY);
+	}
 	//since with the check method tmpX and tmpY is the coordinates of the stone you can use this
 	//to place the stone in the right coordinates not necessarily where the mouse is
 }
@@ -62,6 +66,5 @@ function draw() {
 	rect(0, 0, 540, 540);
 	player.board.drawBoard(); //draws the board itself
 	player.board.drawStones(); //draws any stones that need to be drawn on the board
-	checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be 
-				//placed	
+	checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be placed	
 }
