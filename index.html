@@ -5,8 +5,8 @@
 		<script src = "./board.js"></script>
 		<script src = "./tile.js"></script>
 		<script src = "./stone.js"></script>
-		<script src = "./sketch.js"></script>
 		<script src = "./player.js"></script>
+		<script src = "./sketch.js"></script>
 		
 		<div class="toper">
 			<ul>
@@ -37,11 +37,9 @@
 		<div class="righter">
 			<p id = "score">
 			<script type="text/javascript">
-			import {displayScore} from ./player.js
-			alert(Player.displayScore);
-			</script>
+				document.write(getScore());
+			</script> 
 
-			</script>
 			</p>
 		</div>
 	</body>

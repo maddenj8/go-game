@@ -1,6 +1,11 @@
 var player = new Player();
 var tmpX;
 var tmpY;
+
+function getScore() {
+	return player.score
+}
+
 function setup() {
 	createCanvas(900, 900); //create the canvas
 	console.log(player.board);
@@ -48,7 +53,7 @@ function checkMousePosition() {
 function mousePressed() {
 	//fix a bug where even if the mouse was placed out of range stones could be placed off the board
 	//checks if it is the players turn 
-	if (tmpX >= 40 && tmpY >= 40 && player.currentTurn) {
+	if (tmpX >= 40 && tmpY >= 40 && player.currentTurn) {  //fix this alert thing
 		player.placeStone(tmpX, tmpY);
 		//SEND COORDINATES OF THE NEW STONE TO THE SERVER HERE
 		player.currentTurn = false;
