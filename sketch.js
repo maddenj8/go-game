@@ -25,7 +25,7 @@ function checkMousePosition() {
 				ellipse(player.board.board[i][j].x, player.board.board[i][j].y, 45, 45);
 				return;
 			} 
-			else if (tmpX > (player.board.size * 50 + 20) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25)) {
+			else if (tmpX > (player.board.size * 50 + 20) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25) && tmpX < (player.board.size * 50 + 80)) {
 			//work arounds for the edges of the board as they go out of range of board 
 			//list so I can't use the method as above.
 				ellipse(player.board.size * 50 + 40, player.board.board[i][j].y, 45, 45);
@@ -33,7 +33,7 @@ function checkMousePosition() {
 				tmpY = player.board.board[i][j].y;
 				return;
 			}
-			else if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.size * 50 + 20)) {
+			else if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.size * 50 + 20) && tmpY < (player.board.size * 50 + 80)) {
 				ellipse(player.board.board[i][j].x, player.board.size * 50 + 40, 45, 45);
 				tmpX = player.board.board[i][j].x;
 				tmpY = player.board.size * 50 + 40;
@@ -58,7 +58,7 @@ function mousePressed() {
 		//SEND COORDINATES OF THE NEW STONE TO THE SERVER HERE
 		player.currentTurn = false;
 	}
-	else {
+	else if (mouseX >= 0 && mouseY >= 0 && mouseX <= (player.board.size * 50 + 80) && mouseY <= (player.board.size * 50 + 80) && !player.currentTurn) {
 		alert("It is your opponents turn please wait");
 	}
 	//since with the check method tmpX and tmpY is the coordinates of the stone you can use this
