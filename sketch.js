@@ -66,7 +66,7 @@ function mousePressed() {
 		//SEND COORDINATES OF THE NEW STONE TO THE SERVER HERE
 		console.log(moveTaken);
 		if (moveTaken) {
-			//player.currentTurn = false;
+			player.currentTurn = false;
 			capture(board, player.color, board.stones);
 		}
 	}
@@ -84,7 +84,7 @@ function draw() {
 	board.drawBoard(); //draws the board itself
 	board.drawStones(); //draws any stones that need to be drawn on the board
 	board.drawStones();
-	//if (player.currentTurn) {
+	if (player.currentTurn) {
 		checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be placed	
-	//}
+	}
 }
