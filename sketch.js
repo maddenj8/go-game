@@ -10,7 +10,7 @@ function displayScore() {
 }
 
 function setup() {
-	createCanvas(900, 900);
+	createCanvas(700, 900); // This centres the board in-line with the chat & score box.
 	console.log(board.board);
 	player.placeStone(190, 140, board);
 	player.placeStone(140, 190, board);
