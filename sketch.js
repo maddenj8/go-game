@@ -5,7 +5,7 @@ board.buildBoard();
 var tmpX;
 var tmpY;
 
-function getScore() {
+function displayScore() {
 	return player.score
 }
 
