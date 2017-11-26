@@ -1,51 +1,59 @@
-var player = new Player();
+var player = new Player("black");
+var player_white = new Player("white");
+var board = new Board();
+board.buildBoard();
 var tmpX;
 var tmpY;
 
-function displayScore() {
+function getScore() {
 	return player.score
 }
 
 function setup() {
 	createCanvas(900, 900); //create the canvas
-	console.log(player.board);
+	console.log(board.board);
+	player.placeStone(190, 140, board);
+	player.placeStone(140, 190, board);
+	player.placeStone(190, 240, board);
+	player_white.placeStone(190, 190, board);
 }
 
 function checkMousePosition() {
 	tmpX = mouseX; //freeze the mouseX and mouseY at the particular frame 
 	tmpY = mouseY;
 	fill(0) ? player.color == "black" : fill(255);
-	for (var i = 0; i < player.board.size; i++) {
-		for (var j = 0; j < player.board.size; j++) {
-			if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25)) {
-			//check if the mouse is in range of the stone
-				tmpX = player.board.board[i][j].x;
-				tmpY = player.board.board[i][j].y;
-				//set tmpX and Y to the coordinates the stone will be placed
-				ellipse(player.board.board[i][j].x, player.board.board[i][j].y, 45, 45);
-				return;
-			} 
-			else if (tmpX > (player.board.size * 50 + 20) && tmpY > (player.board.board[i][j].y - 25) && tmpY < (player.board.board[i][j].y + 25) && tmpX < (player.board.size * 50 + 80)) {
-			//work arounds for the edges of the board as they go out of range of board 
-			//list so I can't use the method as above.
-				ellipse(player.board.size * 50 + 40, player.board.board[i][j].y, 45, 45);
-				tmpX = player.board.size * 50 + 40;
-				tmpY = player.board.board[i][j].y;
-				return;
+	for (var i = 0; i < board.size; i++) {
+		for (var j = 0; j < board.size; j++) {
+			if (tmpX > 0 && tmpY > 0 && tmpX < board.size * 50 + 80 && tmpY < board.size * 50 + 80) {
+				//if the mouse is in range of a tile on the board
+				if (tmpX > (board.board[i][j].x - 25) && tmpX < (board.board[i][j].x + 25) && tmpY > (board.board[i][j].y - 25) && tmpY < (board.board[i][j].y + 25)) {
+					tmpX = board.board[i][j].x;
+					tmpY = board.board[i][j].y;
+					ellipse(tmpX, tmpY, 45, 45);
+				}
+				//if the mouse is on a tile just out of range of the board list
+				//left side of the board testing constraints
+				else if (tmpX > (board.size * 50 + 15) && tmpX < (board.size * 50 + 65) && tmpY > (board.board[i][j].y - 25) && tmpY < (board.board[i][j].y + 25)) {
+					tmpX = board.size * 50 + 40;
+					tmpY = board.board[i][j].y;
+					ellipse(tmpX, tmpY, 45, 45);
+				}
+				//same again but bottom constraint
+				else if (tmpY > (board.size * 50 - 15) && tmpY < (board.size * 50 + 65) && tmpX > (board.board[i][j].x - 25) && tmpX < (board.board[i][j].x + 25)) {
+					tmpX = board.board[i][j].x;
+					tmpY = board.size * 50 + 40;
+					ellipse(tmpX, tmpY, 45, 45);
+				}
+				//ridiculous bottom right case 
+				else if (tmpX > (board.size * 50 + 15) && tmpX < (board.size * 50 + 65) && tmpY > (board.size * 50 - 15) && tmpY < (board.size * 50 + 65)) {
+					tmpX = board.size * 50 + 40;
+					tmpY = board.size * 50 + 40;
+					ellipse(tmpX, tmpY, 45, 45);
+				}
+				
 			}
-			else if (tmpX > (player.board.board[i][j].x - 25) && tmpX < (player.board.board[i][j].x + 25) && tmpY > (player.board.size * 50 + 20) && tmpY < (player.board.size * 50 + 80)) {
-				ellipse(player.board.board[i][j].x, player.board.size * 50 + 40, 45, 45);
-				tmpX = player.board.board[i][j].x;
-				tmpY = player.board.size * 50 + 40;
-				return;
-			}
-			//workaround for the bottom left corner as none of these conditions covered that case
-			else if (tmpX > (player.board.size * 50 + 20) && tmpY > (player.board.size * 50 + 20)) {
-				ellipse(player.board.size * 50 + 40, player.board.size * 50 + 40, 45, 45);
-				tmpX = player.board.size * 50 + 40;
-				tmpY = player.board.size * 50 + 40;
-				return;
-			}
+	
+				 
 		}
 	}
 }
@@ -53,12 +61,16 @@ function checkMousePosition() {
 function mousePressed() {
 	//fix a bug where even if the mouse was placed out of range stones could be placed off the board
 	//checks if it is the players turn 
-	if (tmpX >= 40 && tmpY >= 40 && player.currentTurn) {  //fix this alert thing
-		player.placeStone(tmpX, tmpY);
+	if (tmpX >= 40 && tmpY >= 40 && player.currentTurn && tmpX <= board.size * 50 + 40 && tmpY <= board.size * 50 + 40) {  //fix this alert thing
+		var moveTaken = player.placeStone(tmpX, tmpY, board);
 		//SEND COORDINATES OF THE NEW STONE TO THE SERVER HERE
-		player.currentTurn = false;
+		console.log(moveTaken);
+		if (moveTaken) {
+			//player.currentTurn = false;
+			capture(board, player.color, board.stones);
+		}
 	}
-	else if (mouseX >= 0 && mouseY >= 0 && mouseX <= (player.board.size * 50 + 80) && mouseY <= (player.board.size * 50 + 80) && !player.currentTurn) {
+	else if (mouseX >= 0 && mouseY >= 0 && mouseX <= (board.size * 50 + 80) && mouseY <= (board.size * 50 + 80) && !player.currentTurn) {
 		alert("It is your opponents turn please wait");
 	}
 	//since with the check method tmpX and tmpY is the coordinates of the stone you can use this
@@ -68,10 +80,11 @@ function mousePressed() {
 function draw() {
 	//draw the board at every frame
 	fill(242, 176, 109); //draws the frame of the board 
-	rect(100, 0, 540, 540);
-	player.board.drawBoard(); //draws the board itself
-	player.board.drawStones(); //draws any stones that need to be drawn on the board
-	if (player.currentTurn) {
+	rect(0, 0, 540, 540);
+	board.drawBoard(); //draws the board itself
+	board.drawStones(); //draws any stones that need to be drawn on the board
+	board.drawStones();
+	//if (player.currentTurn) {
 		checkMousePosition(); //checks the mouse to get the coordinates of the nearest stone to be placed	
-	}
+	//}
 }

@@ -7,7 +7,7 @@ var Board = function() {
 		for (var i = 0; i < this.size; i++) {
 			this.board.push([]);
 			for (var j = 0; j < this.size; j++) {
-				this.board[i][j] = new Tile(j * offset + 140, i * offset + 40);
+				this.board[i][j] = new Tile(j * offset + 40, i * offset + 40);
 				//this looks wrong as it appears the j and i are in the wrong place but 
 				//if you want to add to the list in the order you would expect the tile 
 				//to be in the list j and i have to be inverted to what you would initially think
@@ -27,8 +27,10 @@ var Board = function() {
 			this.stones[i].drawStone();
 		}
 	}
-	this.isEmpty = function(x, y) {
+	this.isEmpty = function(x, y, color) {
+		console.log(x, y);
 		for (var i = 0; i < this.stones.length; i++) {
+			console.log(this.stones[i].stoneX);
 			if (this.stones[i].stoneX == x && this.stones[i].stoneY == y) {
 				return false;
 			}

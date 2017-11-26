@@ -16,30 +16,29 @@ var board = [
 // nostone is 0 
 
 //      print( board[col][row] )        ;
-function capture( board , color ) {
+function capture( board , color) {
    var opponent = 0;
    var prisoners = 0;
 
-   if( color == 1 ){
-      opponent = 2;
+   if( color == "black" ){
+      opponent = "white";
    } else{
-      opponent = 1;
+      opponent = "black";
    }
 
+   for ( var col = 0 ; col < board.size; col++ ) {
 
-
-   for ( var col = 0 ; col < board.length; col++ ) {
-
-      for ( var row = 0 ; row < board.length; row++ ) {
+      for ( var row = 0 ; row < board.size; row++ ) {
          var life_counter = 4;
 
-         if( color == board[col][row] ) {
+         if( color  == board.board[col][row].stonePlaced ) {
 
          // we check north south east and west 
+         console.log("it gets here");
 
          // north
             if (col > 0){
-               if (board[col -1][row] == opponent  ){
+               if (board.board[col -1][row].stonePlaced == opponent  ){
                   life_counter = life_counter -1;
                   }
                }
@@ -47,14 +46,14 @@ function capture( board , color ) {
 
             // south 
             if (col < 7 ){
-               if (board[col + 1][row] == opponent  ){
+               if (board.board[col + 1][row].stonePlaced == opponent  ){
                   life_counter = life_counter -1;
                   }
                }
 
             //east 
-            if (row  > 0 ){
-               if (board[col][row - 1] == opponent  ){
+            if (row  > 0 ) {
+               if (board.board[col][row - 1].stonePlaced == opponent  ){
                   life_counter = life_counter -1;
                   }
                }
@@ -62,26 +61,25 @@ function capture( board , color ) {
 
             //west 
             if (row  < 7 ){
-               if (board[col][row + 1] == opponent  ){
+               if (board.board[col][row + 1].stonePlaced == opponent  ){
                   life_counter = life_counter -1;
                   }
                }
 
             if( life_counter == 0 ){
-               board[col][row] == 2
+               board.board[col][row].stonePlaced = "empty";
                prisoners = prisoners + 1;
+               for (var i = 0; i < stones.length; stones++) {
+			if (stones[i].stoneX == board[i][j].x && stones[i].stoneY == board[i][j].y) {
+				stones.pop(i);
+				return;
+			}
                }
 
          }
         }
 
+	}
+	}
 }
 
-
-
-return prisoners;
-
-}
-
-
-print(capture( board , 1 ));

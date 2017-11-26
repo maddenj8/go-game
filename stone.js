@@ -7,7 +7,7 @@ var Stone = function(stoneX, stoneY, color) {
 	// drawStone method
 	this.drawStone = function() {
 		stroke(0);
-		if (color.toLowerCase() == "black") {
+		if (color == "black") {
 			fill(0);
 		}
 		else {

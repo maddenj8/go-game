@@ -1,6 +1,7 @@
 var Tile = function(x, y) {
         this.x = x;
         this.y = y;
+	this.stonePlaced = "empty";
         this.drawTile = function() {
                 fill(242, 176, 109);
                 stroke(0);
