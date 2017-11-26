@@ -10,7 +10,7 @@ function displayScore() {
 }
 
 function setup() {
-	createCanvas(900, 900); //create the canvas
+	createCanvas(900, 900);
 	console.log(board.board);
 	player.placeStone(190, 140, board);
 	player.placeStone(140, 190, board);
