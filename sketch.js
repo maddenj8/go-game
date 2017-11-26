@@ -2,7 +2,7 @@ var player = new Player();
 var tmpX;
 var tmpY;
 
-function getScore() {
+function displayScore() {
 	return player.score
 }
 
@@ -68,7 +68,7 @@ function mousePressed() {
 function draw() {
 	//draw the board at every frame
 	fill(242, 176, 109); //draws the frame of the board 
-	rect(0, 0, 540, 540);
+	rect(100, 0, 540, 540);
 	player.board.drawBoard(); //draws the board itself
 	player.board.drawStones(); //draws any stones that need to be drawn on the board
 	if (player.currentTurn) {
