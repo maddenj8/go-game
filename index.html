@@ -6,7 +6,6 @@
 		<script src = "./tile.js"></script>
 		<script src = "./stone.js"></script>
 		<script src = "./player.js"></script>
-		<script src = "./capture.js"></script>
 		<script src = "./sketch.js"></script>
 		
 		<div class="toper">
@@ -14,7 +13,6 @@
 				<li><a href="./index.html">Home</a></li>
 				<li><a href="https://en.wikipedia.org/wiki/Rules_of_Go">Rules of Go</a></li>
 				<li><a href="https://en.wikipedia.org/wiki/Go_(game)">GO!</a></li>
-				<li style="float:right"><a href="./index.html">Home</a></li>
 			</ul>
 		</div>
 	    <link rel="stylesheet" href="style.css">
@@ -24,21 +22,22 @@
 	
 		<div class="lefter"> 
 			<p>Rules of Go:</p>
-<p>1- The board is empty at the onset of the game.</p>
-<p>2- Black makes the first move, after which White and Black alternate.</p>
-<p>3- A move consists of placing one stone of one's own color on an empty intersection on the board.</p>
-<p>4- A player may pass their turn at any time.</p>
-<p>5- A stone or solidly connected group of stones of one color is captured and removed from the board when all the intersections directly adjacent to it are occupied by the enemy. (Capture of the enemy takes precedence over self-capture.)</p>
-<p>6- No stone may be played so as to recreate a former board position.</p>
-<p>7- Two consecutive passes end the game.</p>
-<p>8- A player's area consists of all the points the player has either occupied or surrounded.</p>
-<p>9- The player with more area wins. </p>
+			<p>1- The board is empty at the onset of the game.</p>
+			<p>2- Black makes the first move, after which White and Black alternate.</p>
+			<p>3- A move consists of placing one stone of one's own color on an empty intersection on the board.</p>
+			<p>4- A player may pass their turn at any time.</p>
+			<p>5- A stone or solidly connected group of stones of one color is captured and removed from the board when all the 	intersections directly adjacent to it are occupied by the enemy. (Capture of the enemy takes precedence over self-capture.)</p>
+			<p>6- No stone may be played so as to recreate a former board position.</p>
+			<p>7- Two consecutive passes end the game.</p>
+			<p>8- A player's area consists of all the points the player has either occupied or surrounded.</p>
+			<p>9- The player with more area wins. </p>
 		</div>
 	
 		<div class="righter">
 			<p id = "score">
 			<script type="text/javascript">
-				document.write(getScore());
+				document.write("Player 1: " + displayScore() + "<br><br>")
+				document.write("Player 2: " + displayScore())
 			</script> 
 
 			</p>
