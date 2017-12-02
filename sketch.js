@@ -67,7 +67,7 @@ function mousePressed() {
 		console.log(moveTaken);
 		if (moveTaken) {
 			player.currentTurn = false;
-			capture(board, player.color, board.stones);
+			capture(board, player);
 		}
 	}
 	else if (mouseX >= 0 && mouseY >= 0 && mouseX <= (board.size * 50 + 80) && mouseY <= (board.size * 50 + 80) && !player.currentTurn) {
