@@ -2,6 +2,18 @@ body {
 	background-image: url("woodenbackground.jpg");
 	position: relative;
 }
+
+.button_wrapper {
+	width: 100%;
+	height: auto;
+	position:absolute;
+	top:100%;
+}
+.button_wrapper button {
+	position:relative;
+	left: 46%;
+}
+
 h1 {
     color: #DBB36A;
 	text-align: center;

@@ -1,4 +1,5 @@
 var player = new Player("black");
+
 var player_white = new Player("white");
 var board = new Board();
 board.buildBoard();
@@ -9,8 +10,22 @@ function displayScore() {
 	return player.score
 }
 
+function passMove() {
+	console.log("hello");
+	if (player.currentTurn) {
+		player.currentTurn = false;
+		player.passCounter++;
+		alert("You passed on your move");
+		if (player.passCounter >= 2) {
+			console.log("GAME ENDED");
+			//SEND MESSAGE TO THE OTHER PLAYER
+		}
+	}
+}
+
 function setup() {
-	createCanvas(700, 900); // This centres the board in-line with the chat & score box.
+	createCanvas(542, 542); // This centres the board in-line with the chat & score box.
+	background(0);
 	console.log(board.board);
 	player.placeStone(190, 140, board);
 	player.placeStone(140, 190, board);
