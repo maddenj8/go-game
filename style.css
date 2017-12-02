@@ -9,6 +9,14 @@ body {
 	position:absolute;
 	top:100%;
 }
+
+.turn_wrapper {
+	color:white;
+	position: absolute;
+	top: 80%;
+	right: 10%;
+}
+
 .button_wrapper button {
 	position:relative;
 	left: 46%;

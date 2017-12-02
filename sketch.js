@@ -7,7 +7,16 @@ var tmpX;
 var tmpY;
 
 function displayScore() {
-	return player.score
+	return player.score;
+}
+
+function checkCurrentMove() {
+	if (player.currentTurn) {
+		document.getElementById('turnNotice').innerHTML = "Your Turn";
+	}
+	else {
+		document.getElementById('turnNotice').innerHTML = "Opponent's Turn";
+	}
 }
 
 function passMove() {
@@ -101,6 +110,7 @@ function mousePressed() {
 
 function draw() {
 	//draw the board at every frame
+	checkCurrentMove();
 	fill(242, 176, 109); //draws the frame of the board 
 	rect(0, 0, 540, 540);
 	board.drawBoard(); //draws the board itself
