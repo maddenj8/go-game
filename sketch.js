@@ -91,10 +91,10 @@ function mousePressed() {
 	//fix a bug where even if the mouse was placed out of range stones could be placed off the board
 	//checks if it is the players turn 
 	if (tmpX >= 40 && tmpY >= 40 && player.currentTurn && tmpX <= board.size * 50 + 40 && tmpY <= board.size * 50 + 40) {  //fix this alert thing
-		var moveTaken = player.placeStone(tmpX, tmpY, board);
+		var prevLength = board.stones.length;
+		player.placeStone(tmpX, tmpY, board);
 		//SEND COORDINATES OF THE NEW STONE TO THE SERVER HERE
-		console.log(moveTaken);
-		if (moveTaken) {
+		if (board.stones.length > prevLength) {
 			player.currentTurn = false;
 			capture(board, player);
 			console.log(player.prisoners);
