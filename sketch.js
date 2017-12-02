@@ -21,7 +21,12 @@ function setup() {
 function checkMousePosition() {
 	tmpX = mouseX; //freeze the mouseX and mouseY at the particular frame 
 	tmpY = mouseY;
-	fill(0) ? player.color == "black" : fill(255);
+	if (player.color == "black") {
+		fill(0);
+	}
+	else {
+		fill(255);
+	}
 	for (var i = 0; i < board.size; i++) {
 		for (var j = 0; j < board.size; j++) {
 			if (tmpX > 0 && tmpY > 0 && tmpX < board.size * 50 + 80 && tmpY < board.size * 50 + 80) {
@@ -68,6 +73,8 @@ function mousePressed() {
 		if (moveTaken) {
 			player.currentTurn = false;
 			capture(board, player);
+			console.log(player.prisoners);
+			//DO THE SERVER STUFF HERE
 		}
 	}
 	else if (mouseX >= 0 && mouseY >= 0 && mouseX <= (board.size * 50 + 80) && mouseY <= (board.size * 50 + 80) && !player.currentTurn) {

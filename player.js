@@ -1,6 +1,7 @@
 var Player = function(color) {
 
 	this.rating = 0;				// Their rating is whatever is found in their row in the DB.
+	this.prisoners = 0;
 	this.username = "";	
 	this.score = 0;				// Each game, both player's score initialise to 0.
 	this.currentTurn = true;		// Boolean (T/F) Specifying whose turn it is. DEFAULT TRUE FOR NOW BUT REALLY WOULD BE GIVEN BY THE SERVER
