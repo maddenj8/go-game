@@ -2,13 +2,21 @@
 <html>
 	<head>
 	    <title>GO</title>
+		
+	    
 		<script src = "./p5.js"></script>
 		<script src = "./board.js"></script>
 		<script src = "./tile.js"></script>
 		<script src = "./capture.js"></script>
 		<script src = "./stone.js"></script>
 		<script src = "./player.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="./index.js"></script>
 		<script src = "./sketch.js"></script>
+		
+		
+
+
 		
 		<div class="toper">
 			<ul>
@@ -36,11 +44,12 @@
 			</div>
 			<div class="righter">
 				<p id = "score">
-				<script type="text/javascript">
+				
+			   <script type="text/javascript">
 					document.write("Player 1: " + displayScore() + "<br><br>")
 					document.write("Player 2: " + displayScore())
-				</script> 
-
+				</script>
+				
 				</p>
 			</div>
 		</div>
@@ -51,4 +60,20 @@
 			<h2 id = "turnNotice">
 			<h2>
 		</div>
+		
+		<div class="footer">
+			<div id="wrapper">
+				<div id="menu">
+					<p class="welcome">Welcome, </p>
+					<p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+					<div style="clear:both"></div>
+				</div>    
+				<div id="chatbox"></div>
+               <div id = "error-container"></div>
+                  <input type = "text" id = "message">\
+                  <button type = "button" name = "button" onclick = "sendMessage()">Send</button>\
+               <div id = "message-container"></div>
+			</div>
+		</div>
+		
 </html>
