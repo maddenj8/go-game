@@ -1,4 +1,4 @@
-var socket = io();
+var socket = io('/gogame');
 function setName() {  
    
    var data;

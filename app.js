@@ -15,14 +15,15 @@ app.get('/', function(req, res){
 
 app.use(express.static(path.join(__dirname, 'public'))); 
 
-
+stones= [];
+users = [];
+var clients = 0;
 app.get('/', function(req, res){
    res.sendfile('index.html');
 });
 
-stones= [];
-users = [];
-var clients = 0;
+
+
 io.on('connection', function(socket){
    console.log("A user connected!");
    clients++;
@@ -40,7 +41,7 @@ io.on('connection', function(socket){
       stones = data;
       io.sockets.emit('broadcast', stones);
    }); 
-   /*
+   
    socket.on('setUsername', function(data) {
       if(data in users) {
          socket.emit('userExists', data + ' username is taken! Try again.');
@@ -49,7 +50,7 @@ io.on('connection', function(socket){
          socket.emit('userSet', {username: data});
       }
    });
-   */
+   
    
    socket.on('msg', function(data) {
       io.sockets.emit('newmsg', data);
@@ -58,7 +59,10 @@ io.on('connection', function(socket){
       clients--;
       console.log("user disconnected");
    });
+   
 });
+
+
 
 
  
